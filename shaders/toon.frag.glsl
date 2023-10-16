@@ -1,6 +1,5 @@
 #version 410 core
 
-uniform samplerCube specMap;
 uniform vec3 viewPos;
 
 in vec3 vNormal;
