@@ -25,9 +25,9 @@ private:
 
     std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName);
 
-    std::unordered_set<std::string> texturesLoaded;
-    std::vector<Mesh> meshes;
-    std::string directory;
+    std::unordered_set<std::string> m_loadedTextures;
+    std::vector<Mesh> m_meshes;
+    std::string m_directory;
     bool gammaCorrection;
 };
 

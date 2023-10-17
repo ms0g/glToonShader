@@ -11,7 +11,7 @@ Model::Model(const std::string& path, bool gamma) : gammaCorrection(gamma) {
 
 
 void Model::Draw(Shader& shader) {
-    for (auto& mesh: meshes)
+    for (auto& mesh: m_meshes)
         mesh.Draw(shader);
 }
 
@@ -28,7 +28,7 @@ void Model::LoadModel(const std::string& path) {
         return;
     }
     // retrieve the directory path of the filepath
-    directory = path.substr(0, path.find_last_of('/')).append("/");
+    m_directory = path.substr(0, path.find_last_of('/')).append("/");
 
     // process ASSIMP's root node recursively
     ProcessNode(scene->mRootNode, scene);
@@ -41,7 +41,7 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene) {
         // the node object only contains indices to index the actual objects in the scene.
         // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        meshes.push_back(ProcessMesh(mesh, scene));
+        m_meshes.push_back(ProcessMesh(mesh, scene));
     }
     // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
     for (unsigned int i = 0; i < node->mNumChildren; i++) {
@@ -139,15 +139,15 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType 
         aiString str;
         mat->GetTexture(type, i, &str);
         // check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
-        if (texturesLoaded.contains(str.C_Str())) continue;
+        if (m_loadedTextures.contains(str.C_Str())) continue;
 
         Texture texture;
-        texture.id = texture::load((directory + str.C_Str()).c_str());
+        texture.id = texture::load((m_directory + str.C_Str()).c_str());
         texture.type = typeName;
         texture.path = str.C_Str();
         textures.push_back(texture);
         // store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.
-        texturesLoaded.emplace(str.C_Str());
+        m_loadedTextures.emplace(str.C_Str());
     }
     return textures;
 }
