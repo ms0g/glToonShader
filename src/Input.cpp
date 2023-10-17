@@ -49,17 +49,17 @@ void Input::ProcessMouse(Camera& camera, int x, int y) {
     auto xpos = static_cast<float>(x);
     auto ypos = static_cast<float>(y);
 
-    if (firstMouse) {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
+    if (m_firstMouse) {
+        m_lastX = xpos;
+        m_lastY = ypos;
+        m_firstMouse = false;
     }
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+    float xoffset = xpos - m_lastX;
+    float yoffset = m_lastY - ypos; // reversed since y-coordinates go from bottom to top
 
-    lastX = xpos;
-    lastY = ypos;
+    m_lastX = xpos;
+    m_lastY = ypos;
 
     camera.ProcessMouseMovement(xoffset, yoffset);
 }

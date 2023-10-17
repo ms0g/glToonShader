@@ -15,9 +15,8 @@ private:
 
     void ProcessMouse(Camera& camera, int x, int y);
 
-    int mouseX{}, mouseY{};
-    float lastX{SCR_WIDTH / 2.0f};
-    float lastY{SCR_HEIGHT / 2.0f};
-    bool firstMouse{true};
+    float m_lastX{SCR_WIDTH / 2.0f};
+    float m_lastY{SCR_HEIGHT / 2.0f};
+    bool m_firstMouse{true};
 
 };
