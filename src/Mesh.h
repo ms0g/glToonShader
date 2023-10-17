@@ -39,12 +39,12 @@ public:
 
 private:
     // mesh Data
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
-    std::vector<Texture> textures;
-    unsigned int VAO{};
+    std::vector<Vertex> m_vertices;
+    std::vector<unsigned int> m_indices;
+    std::vector<Texture> m_textures;
+    unsigned int m_VAO{};
     // render data
-    unsigned int VBO{}, EBO{};
+    unsigned int m_VBO{}, m_EBO{};
 
     // initializes all the buffer objects/arrays
     void SetupMesh();

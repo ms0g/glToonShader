@@ -5,9 +5,9 @@
 
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures) :
-        vertices(std::move(vertices)),
-        indices(std::move(indices)),
-        textures(std::move(textures)) {
+        m_vertices(std::move(vertices)),
+        m_indices(std::move(indices)),
+        m_textures(std::move(textures)) {
     // now that we have all the required data, set the vertex buffers and its attribute pointers.
     SetupMesh();
 }
@@ -20,11 +20,11 @@ void Mesh::Draw(Shader& shader) {
     unsigned int normalNr = 1;
     unsigned int heightNr = 1;
 
-    for (unsigned int i = 0; i < textures.size(); i++) {
+    for (unsigned int i = 0; i < m_textures.size(); i++) {
         glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
         // retrieve texture number (the N in diffuse_textureN)
         std::string number;
-        std::string name = textures[i].type;
+        std::string name = m_textures[i].type;
         if (name == "texture_diffuse")
             number = std::to_string(diffuseNr++);
         else if (name == "texture_specular")
@@ -37,12 +37,12 @@ void Mesh::Draw(Shader& shader) {
         // now set the sampler to the correct texture unit
         shader.SetInt(name + number, i);
         // and finally bind the texture
-        glBindTexture(GL_TEXTURE_2D, textures[i].id);
+        glBindTexture(GL_TEXTURE_2D, m_textures[i].id);
     }
 
     // draw mesh
-    glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
+    glBindVertexArray(m_VAO);
+    glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(m_indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
     // always good practice to set everything back to defaults once configured.
@@ -52,19 +52,19 @@ void Mesh::Draw(Shader& shader) {
 
 void Mesh::SetupMesh() {
     // create vao
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    glGenVertexArrays(1, &m_VAO);
+    glBindVertexArray(m_VAO);
 
     // create buffers
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
+    glGenBuffers(1, &m_VBO);
+    glGenBuffers(1, &m_EBO);
 
     // bind the buffer to be used
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+    glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &m_vertices[0], GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(unsigned int), &m_indices[0], GL_STATIC_DRAW);
 
     // set the vertex attribute pointers
     // vertex Positions
