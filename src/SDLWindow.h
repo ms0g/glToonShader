@@ -22,11 +22,11 @@ public:
 
 private:
     const std::string m_title;
-    SDL_Window* window;
-    SDL_GLContext context;
+    SDL_Window* m_window;
+    SDL_GLContext m_context;
 
-    double previousSeconds{};
-    double currentSeconds{};
-    int frameCount{};
+    double m_previousSeconds{};
+    double m_currentSeconds{};
+    int m_frameCount{};
 
 };
