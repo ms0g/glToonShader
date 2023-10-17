@@ -40,7 +40,7 @@ Engine::Engine() :
 
     isRunning = true;
 
-#ifndef DEBUG
+#ifdef DEBUG
     std::cout << "OpenGL version: " << glGetString(GL_VERSION) << '\n';
     std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << '\n';
     std::cout << "OpenGL Driver Vendor: " << glGetString(GL_VENDOR) << '\n';
