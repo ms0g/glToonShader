@@ -34,18 +34,18 @@ private:
     void UpdateCameraVectors();
 
     // camera Attributes
-    glm::vec3 position{};
-    glm::vec3 front;
-    glm::vec3 up{};
-    glm::vec3 right{};
-    glm::vec3 worldUp{};
+    glm::vec3 m_position{};
+    glm::vec3 m_front;
+    glm::vec3 m_up{};
+    glm::vec3 m_right{};
+    glm::vec3 m_worldUp{};
     // euler Angles
-    float yaw;
-    float pitch;
+    float m_yaw;
+    float m_pitch;
     // camera options
-    float movementSpeed;
-    float mouseSensitivity;
-    float zoom;
+    float m_movementSpeed;
+    float m_mouseSensitivity;
+    float m_zoom;
 
     static constexpr float YAW{-90.0f};
     static constexpr float PITCH{0.0f};
