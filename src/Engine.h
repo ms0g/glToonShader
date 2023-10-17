@@ -23,15 +23,15 @@ public:
 
 private:
     bool isRunning;
-    std::unique_ptr<IWindow> window;
-    std::unique_ptr<Gui> gui;
-    std::unique_ptr<Camera> camera;
-    std::unique_ptr<Input> input;
-    std::unique_ptr<Shader> shader;
-    std::unique_ptr<Model> model;
+    std::unique_ptr<IWindow> m_window;
+    std::unique_ptr<Gui> m_gui;
+    std::unique_ptr<Camera> m_camera;
+    std::unique_ptr<Input> m_input;
+    std::unique_ptr<Shader> m_shader;
+    std::unique_ptr<Model> m_model;
 
 
-    float deltaTime{};
-    uint32_t millisecsPreviousFrame{0};
+    float m_deltaTime{};
+    uint32_t m_millisecsPreviousFrame{0};
 
 };
