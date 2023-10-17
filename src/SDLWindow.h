@@ -16,7 +16,7 @@ public:
 
     void UpdateFpsCounter(float dt) override;
 
-    void Clear() override;
+    void ClearImpl(float r, float g, float b, float a) override;
 
     void SwapBuffer() override;
 

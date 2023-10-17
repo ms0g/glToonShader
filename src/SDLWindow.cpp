@@ -77,8 +77,8 @@ void SDLWindow::UpdateFpsCounter(float dt) {
     frameCount++;
 }
 
-void SDLWindow::Clear() {
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+void SDLWindow::ClearImpl(float r, float g, float b, float a) {
+    glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
