@@ -25,7 +25,7 @@ SDLWindow::SDLWindow(const char* title, bool fullscreen) : m_title(title) {
     SDL_DisplayMode displayMode;
     SDL_GetCurrentDisplayMode(0, &displayMode);
 
-    m_window = SDL_CreateWindow(
+    m_sdlWindow = SDL_CreateWindow(
             m_title.c_str(),
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
@@ -33,29 +33,29 @@ SDLWindow::SDLWindow(const char* title, bool fullscreen) : m_title(title) {
             displayMode.h,
             SDL_WINDOW_OPENGL);
 
-    if (!m_window) {
+    if (!m_sdlWindow) {
         std::cerr << "Error creating SDL Window";
         return;
     }
 
-    SDL_SetWindowFullscreen(m_window, flags);
+    SDL_SetWindowFullscreen(m_sdlWindow, flags);
 
-    m_context = SDL_GL_CreateContext(m_window);
+    m_sdlGlContext = SDL_GL_CreateContext(m_sdlWindow);
 
 }
 
 SDLWindow::~SDLWindow() {
-    SDL_GL_DeleteContext(m_context);
-    SDL_DestroyWindow(m_window);
+    SDL_GL_DeleteContext(m_sdlGlContext);
+    SDL_DestroyWindow(m_sdlWindow);
     SDL_Quit();
 }
 
 SDL_Window* SDLWindow::GetWindow() const {
-    return m_window;
+    return m_sdlWindow;
 }
 
 void* SDLWindow::GetContext() const {
-    return m_context;
+    return m_sdlGlContext;
 }
 
 void SDLWindow::UpdateFpsCounter(float dt) {
@@ -71,7 +71,7 @@ void SDLWindow::UpdateFpsCounter(float dt) {
 
         snprintf(tmp, 128, "%s @ fps: %.2f", m_title.c_str(), fps);
 
-        SDL_SetWindowTitle(m_window, tmp);
+        SDL_SetWindowTitle(m_sdlWindow, tmp);
         m_frameCount = 0;
     }
     m_frameCount++;
@@ -83,5 +83,5 @@ void SDLWindow::ClearImpl(float r, float g, float b, float a) {
 }
 
 void SDLWindow::SwapBuffer() {
-    SDL_GL_SwapWindow(m_window);
+    SDL_GL_SwapWindow(m_sdlWindow);
 }

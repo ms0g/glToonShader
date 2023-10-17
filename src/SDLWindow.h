@@ -22,8 +22,8 @@ public:
 
 private:
     const std::string m_title;
-    SDL_Window* m_window;
-    SDL_GLContext m_context;
+    SDL_Window* m_sdlWindow;
+    SDL_GLContext m_sdlGlContext;
 
     double m_previousSeconds{};
     double m_currentSeconds{};
