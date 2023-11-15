@@ -24,7 +24,7 @@ Gui::~Gui() {
     ImGui::DestroyContext();
 }
 
-void Gui::Render() {
+void Gui::render() {
     // Start the Dear ImGui frame
 //    ImGui_ImplOpenGL3_NewFrame();
 //    ImGui_ImplSDL2_NewFrame();

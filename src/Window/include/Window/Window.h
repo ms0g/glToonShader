@@ -11,13 +11,13 @@ public:
 
     ~Window() override;
 
-    void UpdateFpsCounter(float dt);
+    void updateFpsCounter(float dt);
 
-    [[nodiscard]] SDL_GLContext GLContext() const;
+    [[nodiscard]] SDL_GLContext glContext() const;
 
-    void ClearImpl(float r, float g, float b, float a) override;
+    void clearImpl(float r, float g, float b, float a) override;
 
-    void SwapBuffer();
+    void swapBuffer();
 
 private:
     const std::string m_title;

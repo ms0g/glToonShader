@@ -9,5 +9,5 @@ public:
 
     ~Gui();
 
-    void Render();
+    void render();
 };

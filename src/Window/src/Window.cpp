@@ -50,7 +50,7 @@ Window::~Window() {
     SDL_Quit();
 }
 
-void Window::UpdateFpsCounter(float dt) {
+void Window::updateFpsCounter(float dt) {
     double elapsedSeconds;
 
     m_currentSeconds += dt;
@@ -69,15 +69,15 @@ void Window::UpdateFpsCounter(float dt) {
     m_frameCount++;
 }
 
-void Window::ClearImpl(float r, float g, float b, float a) {
+void Window::clearImpl(float r, float g, float b, float a) {
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-SDL_GLContext Window::GLContext() const {
+SDL_GLContext Window::glContext() const {
     return m_glContext;
 }
 
-void Window::SwapBuffer() {
+void Window::swapBuffer() {
     SDL_GL_SwapWindow(m_window);
 }

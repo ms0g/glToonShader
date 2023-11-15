@@ -13,16 +13,16 @@ class Engine {
 public:
     Engine();
 
-    [[nodiscard]] bool IsRunning() const;
+    [[nodiscard]] bool isRunning() const;
 
-    void ProcessInput();
+    void processInput();
 
-    void Update();
+    void update();
 
-    void Render();
+    void render();
 
 private:
-    bool isRunning;
+    bool m_isRunning;
     std::unique_ptr<IWindow<SDL_Window>> m_window;
     std::unique_ptr<Gui> m_gui;
     std::unique_ptr<Camera> m_camera;

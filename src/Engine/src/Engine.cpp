@@ -33,12 +33,12 @@ Engine::Engine() :
                                         Filesystem::path(SHADER_DIR + "toon.frag.glsl"));
 
     auto window = dynamic_cast<Window*>(m_window.get());
-    m_gui = std::make_unique<Gui>(m_window->NativeHandle(),
-                                  window->GLContext());
+    m_gui = std::make_unique<Gui>(m_window->nativeHandle(),
+                                  window->glContext());
 
     m_model = std::make_unique<Model>(Filesystem::path(ASSET_DIR + "suzanne.glb"));
 
-    isRunning = true;
+    m_isRunning = true;
 
 #ifdef DEBUG
     std::cout << "OpenGL version: " << glGetString(GL_VERSION) << '\n';
@@ -48,46 +48,46 @@ Engine::Engine() :
 #endif
 }
 
-bool Engine::IsRunning() const {
-    return isRunning;
+bool Engine::isRunning() const {
+    return m_isRunning;
 }
 
-void Engine::ProcessInput() {
-    m_input->Process(*m_camera, m_window->NativeHandle(), m_deltaTime, isRunning);
+void Engine::processInput() {
+    m_input->process(*m_camera, m_window->nativeHandle(), m_deltaTime, m_isRunning);
 }
 
-void Engine::Update() {
+void Engine::update() {
     m_deltaTime = (SDL_GetTicks() - m_millisecsPreviousFrame) / 1000.0f;
     m_millisecsPreviousFrame = SDL_GetTicks();
 
     auto window = dynamic_cast<Window*>(m_window.get());
-    window->UpdateFpsCounter(m_deltaTime);
+    window->updateFpsCounter(m_deltaTime);
 
     // Activate shader
-    m_shader->Activate();
+    m_shader->activate();
     // View/projection transformations
-    glm::mat4 viewMat = m_camera->GetViewMatrix();
-    glm::vec3 viewPos = m_camera->GetPosition();
-    glm::mat4 projectionMat = glm::perspective(glm::radians(m_camera->GetZoom()),
+    glm::mat4 viewMat = m_camera->getViewMatrix();
+    glm::vec3 viewPos = m_camera->getPosition();
+    glm::mat4 projectionMat = glm::perspective(glm::radians(m_camera->getZoom()),
                                             (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
-    m_shader->SetMat4("projection", projectionMat);
-    m_shader->SetMat4("view", viewMat);
-    m_shader->SetVec3("viewPos", viewPos);
+    m_shader->setMat4("projection", projectionMat);
+    m_shader->setMat4("view", viewMat);
+    m_shader->setVec3("viewPos", viewPos);
     // Render the loaded model
     glm::mat4 modelMat = glm::mat4(1.0f);
     modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
     modelMat = glm::scale(modelMat, glm::vec3(1.0f, 1.0f, 1.0f));    // it's a bit too big for our scene, so scale it down
-    m_shader->SetMat4("model", modelMat);
+    m_shader->setMat4("model", modelMat);
 }
 
-void Engine::Render() {
-    m_window->Clear(0.2f, 0.3f, 0.3f, 1.0f);
+void Engine::render() {
+    m_window->clear(0.2f, 0.3f, 0.3f, 1.0f);
 
-    m_model->Draw(*m_shader);
+    m_model->draw(*m_shader);
 
-    m_gui->Render();
+    m_gui->render();
 
     // SDL swap buffers
     auto window = dynamic_cast<Window*>(m_window.get());
-    window->SwapBuffer();
+    window->swapBuffer();
 }

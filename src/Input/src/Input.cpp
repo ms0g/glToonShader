@@ -4,7 +4,7 @@
 #include "../../../libs/imgui/imgui_impl_sdl.h"
 
 
-void Input::Process(Camera& camera, SDL_Window* window, float dt, bool& isRunning) {
+void Input::process(Camera& camera, SDL_Window* window, float dt, bool& isRunning) {
     SDL_Event event;
     SDL_PollEvent(&event);
 
@@ -24,28 +24,28 @@ void Input::Process(Camera& camera, SDL_Window* window, float dt, bool& isRunnin
     io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
     io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
 
-    ProcessKeyboard(camera, dt, isRunning);
-    ProcessMouse(camera, mouseX, mouseY);
+    processKeyboard(camera, dt, isRunning);
+    processMouse(camera, mouseX, mouseY);
 }
 
 
-void Input::ProcessKeyboard(Camera& camera, float dt, bool& isRunning) {
+void Input::processKeyboard(Camera& camera, float dt, bool& isRunning) {
     auto* keystate = SDL_GetKeyboardState(nullptr);
 
     if (keystate[SDL_SCANCODE_ESCAPE]) {
         isRunning = false;
     } else if (keystate[SDL_SCANCODE_W]) {
-        camera.ProcessKeyboard(FORWARD, dt);
+        camera.processKeyboard(FORWARD, dt);
     } else if (keystate[SDL_SCANCODE_S]) {
-        camera.ProcessKeyboard(BACKWARD, dt);
+        camera.processKeyboard(BACKWARD, dt);
     } else if (keystate[SDL_SCANCODE_A]) {
-        camera.ProcessKeyboard(LEFT, dt);
+        camera.processKeyboard(LEFT, dt);
     } else if (keystate[SDL_SCANCODE_D]) {
-        camera.ProcessKeyboard(RIGHT, dt);
+        camera.processKeyboard(RIGHT, dt);
     }
 }
 
-void Input::ProcessMouse(Camera& camera, int x, int y) {
+void Input::processMouse(Camera& camera, int x, int y) {
     auto xpos = static_cast<float>(x);
     auto ypos = static_cast<float>(y);
 
@@ -61,5 +61,5 @@ void Input::ProcessMouse(Camera& camera, int x, int y) {
     m_lastX = xpos;
     m_lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    camera.processMouseMovement(xoffset, yoffset);
 }

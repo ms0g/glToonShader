@@ -4,10 +4,10 @@
 int main() {
     Engine glEngine;
 
-    while (glEngine.IsRunning()) {
-        glEngine.ProcessInput();
-        glEngine.Update();
-        glEngine.Render();
+    while (glEngine.isRunning()) {
+        glEngine.processInput();
+        glEngine.update();
+        glEngine.render();
     }
 
     return 0;

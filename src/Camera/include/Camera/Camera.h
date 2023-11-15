@@ -16,22 +16,22 @@ public:
 
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
 
-    glm::mat4 GetViewMatrix();
+    glm::mat4 getViewMatrix();
 
-    [[nodiscard]] float GetZoom() const;
+    [[nodiscard]] float getZoom() const;
 
-    [[nodiscard]] const glm::vec3& GetPosition() const;
+    [[nodiscard]] const glm::vec3& getPosition() const;
 
-    [[nodiscard]] const glm::vec3& GetFront() const;
+    [[nodiscard]] const glm::vec3& getFront() const;
 
-    void ProcessKeyboard(CameraMovement direction, float deltaTime);
+    void processKeyboard(CameraMovement direction, float deltaTime);
 
-    void ProcessMouseMovement(float xoffset, float yoffset);
+    void processMouseMovement(float xoffset, float yoffset);
 
-    void ProcessMouseScroll(float yoffset);
+    void processMouseScroll(float yoffset);
 
 private:
-    void UpdateCameraVectors();
+    void updateCameraVectors();
 
     // camera Attributes
     glm::vec3 m_position{};

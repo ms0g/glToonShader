@@ -14,16 +14,16 @@ class Model {
 public:
     explicit Model(std::string const& path, bool gamma = false);
 
-    void Draw(Shader& shader);
+    void draw(Shader& shader);
 
 private:
-    void LoadModel(std::string const& path);
+    void loadModel(std::string const& path);
 
-    void ProcessNode(aiNode* node, const aiScene* scene);
+    void processNode(aiNode* node, const aiScene* scene);
 
-    Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
+    Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 
-    std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName);
+    std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName);
 
     std::unordered_set<std::string> m_loadedTextures;
     std::vector<Mesh> m_meshes;
