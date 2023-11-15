@@ -2,6 +2,7 @@
 #include <iostream>
 #include "glad/glad.h"
 
+
 Window::Window(const char* title, bool fullscreen) : m_title(title) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "Error initializing SDL" << std::endl;

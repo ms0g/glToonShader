@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Configs.hpp"
+#include "Configs/Configs.hpp"
 
 class Camera;
 class SDL_Window;

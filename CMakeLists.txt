@@ -22,6 +22,8 @@ set(STB_IMAGE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs/image/include)
 set(KHR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs/KHR/include)
 set(WINDOW_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Window/include)
 set(CAMERA_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Camera/include)
+set(CONFIGS_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Configs/include)
+
 set(GLAD
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/src/glad.c
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/include/glad/glad.h)
@@ -48,7 +50,8 @@ set(COMPILATION_UNIT
         ${FILESYSTEM}
         ${IMGUI}
         ${WINDOW}
-        ${CAMERA})
+        ${CAMERA}
+        )
 
 add_executable(${PROJECT_NAME} ${COMPILATION_UNIT})
 
@@ -58,7 +61,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         ${GLM_INCLUDE_DIRS}
         ${STB_IMAGE_INCLUDE_DIRS}
         ${KHR_INCLUDE_DIRS}
-        ${WINDOW_INCLUDE},
-        ${CAMERA_INCLUDE})
+        ${WINDOW_INCLUDE}
+        ${CAMERA_INCLUDE}
+        ${CONFIGS_INCLUDE})
 
 target_link_libraries(${PROJECT_NAME} OpenGL::GL ${SDL2_LIBRARIES} ${ASSIMP_LIBRARIES})
