@@ -20,9 +20,7 @@ set(GLM_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs/glm/include)
 set(GLAD_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/include)
 set(STB_IMAGE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs/image/include)
 set(KHR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs/KHR/include)
-
-file(GLOB_RECURSE SOURCES "src/*")
-file(GLOB_RECURSE IMGUI "libs/imgui/*")
+set(WINDOW_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Window/include)
 set(GLAD
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/src/glad.c
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/include/glad/glad.h)
@@ -32,8 +30,14 @@ set(STB_IMAGE
 set(FILESYSTEM
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/filesystem/src/filesystem.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/filesystem/include/filesystem/filesystem.h)
+set(WINDOW
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Window/src/Window.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Window/include/Window/Window.h)
 
-set(COMPILATION_UNIT ${SOURCES} ${GLAD} ${STB_IMAGE} ${FILESYSTEM} ${IMGUI})
+file(GLOB_RECURSE SOURCES "src/*")
+file(GLOB_RECURSE IMGUI "libs/imgui/*")
+
+set(COMPILATION_UNIT ${SOURCES} ${GLAD} ${STB_IMAGE} ${FILESYSTEM} ${IMGUI} ${WINDOW})
 
 add_executable(${PROJECT_NAME} ${COMPILATION_UNIT})
 
@@ -42,6 +46,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         ${FILESYSTEM_INCLUDE_DIRS}
         ${GLM_INCLUDE_DIRS}
         ${STB_IMAGE_INCLUDE_DIRS}
-        ${KHR_INCLUDE_DIRS})
+        ${KHR_INCLUDE_DIRS}
+        ${WINDOW_INCLUDE})
 
 target_link_libraries(${PROJECT_NAME} OpenGL::GL ${SDL2_LIBRARIES} ${ASSIMP_LIBRARIES})

@@ -1,11 +1,10 @@
 #include "Engine.h"
 #include <iostream>
-#include <SDL2/SDL.h>
 #include "glm/glm.hpp"
 #include "image/stb_image.h"
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
-#include "Window.h"
+#include "Window/Window.h"
 #include "Configs.hpp"
 
 
@@ -35,7 +34,7 @@ Engine::Engine() :
 
     auto window = dynamic_cast<Window*>(m_window.get());
     m_gui = std::make_unique<Gui>(m_window->NativeHandle(),
-                                  window->GetContext());
+                                  window->GLContext());
 
     m_model = std::make_unique<Model>(Filesystem::path(ASSET_DIR + "suzanne.glb"));
 
@@ -89,5 +88,6 @@ void Engine::Render() {
     m_gui->Render();
 
     // SDL swap buffers
-    m_window->SwapBuffer();
+    auto window = dynamic_cast<Window*>(m_window.get());
+    window->SwapBuffer();
 }

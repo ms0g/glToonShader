@@ -1,9 +1,9 @@
-#include "Window.h"
+#include "Window/Window.h"
 #include <iostream>
 #include "glad/glad.h"
 
-Window::Window(const char *title, bool fullscreen) : m_title(title) {
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+Window::Window(const char* title, bool fullscreen) : m_title(title) {
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "Error initializing SDL" << std::endl;
         return;
     }
@@ -40,17 +40,13 @@ Window::Window(const char *title, bool fullscreen) : m_title(title) {
 
     SDL_SetWindowFullscreen(m_window, flags);
 
-    m_sdlGlContext = SDL_GL_CreateContext(m_window);
+    m_glContext = SDL_GL_CreateContext(m_window);
 }
 
 Window::~Window() {
-    SDL_GL_DeleteContext(m_sdlGlContext);
+    SDL_GL_DeleteContext(m_glContext);
     SDL_DestroyWindow(m_window);
     SDL_Quit();
-}
-
-void* Window::GetContext() const {
-    return m_sdlGlContext;
 }
 
 void Window::UpdateFpsCounter(float dt) {
@@ -75,6 +71,10 @@ void Window::UpdateFpsCounter(float dt) {
 void Window::ClearImpl(float r, float g, float b, float a) {
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+SDL_GLContext Window::GLContext() const {
+    return m_glContext;
 }
 
 void Window::SwapBuffer() {

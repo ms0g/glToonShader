@@ -13,8 +13,6 @@ public:
         ClearImpl(r, g, b, a);
     }
 
-    virtual void SwapBuffer() = 0;
-
 protected:
     virtual void ClearImpl(float r, float g, float b, float a) = 0;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "IWindow.hpp"
+#include "Window/IWindow.hpp"
 #include "Shader.h"
 #include "Model.h"
 #include "Input.h"
