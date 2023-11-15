@@ -1,7 +1,7 @@
-#include "Mesh.h"
+#include "Model/Mesh.h"
 #include <utility>
 #include "glad/glad.h"
-#include "Shader.h"
+#include "Shader/Shader.h"
 
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures) :

@@ -3,10 +3,10 @@
 #include <memory>
 #include "Camera/Camera.h"
 #include "Window/IWindow.hpp"
-#include "Shader.h"
-#include "Model.h"
-#include "Input.h"
-#include "Gui.h"
+#include "Shader/Shader.h"
+#include "Model/Model.h"
+#include "Input/Input.h"
+#include "Gui/Gui.h"
 
 
 class Engine {

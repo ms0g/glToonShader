@@ -23,7 +23,11 @@ set(KHR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs/KHR/include)
 set(WINDOW_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Window/include)
 set(CAMERA_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Camera/include)
 set(CONFIGS_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Configs/include)
-
+set(ENGINE_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Engine/include)
+set(GUI_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Gui/include)
+set(SHADER_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Shader/include)
+set(INPUT_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Input/include)
+set(MODEL_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/include)
 set(GLAD
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/src/glad.c
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/include/glad/glad.h)
@@ -39,18 +43,41 @@ set(WINDOW
 set(CAMERA
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Camera/src/Camera.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Camera/include/Camera/Camera.h)
+set(ENGINE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Engine/src/Engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Engine/include/Engine/Engine.h)
+set(GUI
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Gui/src/Gui.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Gui/include/Gui/Gui.h)
+set(SHADER
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Shader/src/Shader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Shader/include/Shader/Shader.h)
+set(INPUT
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Input/src/Input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Input/include/Input/Input.h)
+set(MODEL
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/src/Model.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/include/Model/Model.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/src/Mesh.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/include/Model/Mesh.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/src/Texture.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/include/Model/Texture.h)
 
-file(GLOB_RECURSE SOURCES "src/*")
 file(GLOB_RECURSE IMGUI "libs/imgui/*")
 
 set(COMPILATION_UNIT
-        ${SOURCES}
+        src/Main.cpp
         ${GLAD}
         ${STB_IMAGE}
         ${FILESYSTEM}
         ${IMGUI}
         ${WINDOW}
         ${CAMERA}
+        ${ENGINE}
+        ${GUI}
+        ${SHADER}
+        ${INPUT}
+        ${MODEL}
         )
 
 add_executable(${PROJECT_NAME} ${COMPILATION_UNIT})
@@ -63,6 +90,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         ${KHR_INCLUDE_DIRS}
         ${WINDOW_INCLUDE}
         ${CAMERA_INCLUDE}
-        ${CONFIGS_INCLUDE})
+        ${CONFIGS_INCLUDE}
+        ${ENGINE_INCLUDE}
+        ${GUI_INCLUDE}
+        ${SHADER_INCLUDE}
+        ${INPUT_INCLUDE}
+        ${MODEL_INCLUDE}
+        )
 
 target_link_libraries(${PROJECT_NAME} OpenGL::GL ${SDL2_LIBRARIES} ${ASSIMP_LIBRARIES})
