@@ -1,11 +1,11 @@
 #pragma once
 
 #include <memory>
+#include "Camera/Camera.h"
 #include "Window/IWindow.hpp"
 #include "Shader.h"
 #include "Model.h"
 #include "Input.h"
-#include "Camera.h"
 #include "Gui.h"
 
 

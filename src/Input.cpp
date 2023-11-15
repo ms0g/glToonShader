@@ -1,6 +1,6 @@
 #include "Input.h"
 #include <SDL2/SDL.h>
-#include "Camera.h"
+#include "Camera/Camera.h"
 #include "../libs/imgui/imgui_impl_sdl.h"
 
 
