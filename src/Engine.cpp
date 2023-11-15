@@ -5,12 +5,12 @@
 #include "image/stb_image.h"
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
-#include "SDLWindow.h"
+#include "Window.h"
 #include "Configs.hpp"
 
 
 Engine::Engine() :
-        m_window(std::make_unique<SDLWindow>("Toon Shader")),
+        m_window(std::make_unique<Window>("Toon Shader")),
         m_camera(std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f))),
         m_input(std::make_unique<Input>()) {
 
@@ -33,8 +33,9 @@ Engine::Engine() :
     m_shader = std::make_unique<Shader>(Filesystem::path(SHADER_DIR + "toon.vert.glsl"),
                                         Filesystem::path(SHADER_DIR + "toon.frag.glsl"));
 
-    m_gui = std::make_unique<Gui>(dynamic_cast<SDLWindow*>(m_window.get())->GetWindow(),
-                                  dynamic_cast<SDLWindow*>(m_window.get())->GetContext());
+    auto window = dynamic_cast<Window*>(m_window.get());
+    m_gui = std::make_unique<Gui>(m_window->NativeHandle(),
+                                  window->GetContext());
 
     m_model = std::make_unique<Model>(Filesystem::path(ASSET_DIR + "suzanne.glb"));
 
@@ -48,22 +49,20 @@ Engine::Engine() :
 #endif
 }
 
-
 bool Engine::IsRunning() const {
     return isRunning;
 }
 
-
 void Engine::ProcessInput() {
-    m_input->Process(*m_camera, dynamic_cast<SDLWindow*>(m_window.get())->GetWindow(), m_deltaTime, isRunning);
+    m_input->Process(*m_camera, m_window->NativeHandle(), m_deltaTime, isRunning);
 }
-
 
 void Engine::Update() {
     m_deltaTime = (SDL_GetTicks() - m_millisecsPreviousFrame) / 1000.0f;
     m_millisecsPreviousFrame = SDL_GetTicks();
 
-    m_window->UpdateFpsCounter(m_deltaTime);
+    auto window = dynamic_cast<Window*>(m_window.get());
+    window->UpdateFpsCounter(m_deltaTime);
 
     // Activate shader
     m_shader->Activate();
@@ -81,7 +80,6 @@ void Engine::Update() {
     modelMat = glm::scale(modelMat, glm::vec3(1.0f, 1.0f, 1.0f));    // it's a bit too big for our scene, so scale it down
     m_shader->SetMat4("model", modelMat);
 }
-
 
 void Engine::Render() {
     m_window->Clear(0.2f, 0.3f, 0.3f, 1.0f);

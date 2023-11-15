@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "Window.hpp"
+#include "IWindow.hpp"
 #include "Shader.h"
 #include "Model.h"
 #include "Input.h"
@@ -23,7 +23,7 @@ public:
 
 private:
     bool isRunning;
-    std::unique_ptr<IWindow> m_window;
+    std::unique_ptr<IWindow<SDL_Window>> m_window;
     std::unique_ptr<Gui> m_gui;
     std::unique_ptr<Camera> m_camera;
     std::unique_ptr<Input> m_input;

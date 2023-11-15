@@ -1,8 +1,8 @@
-#include "SDLWindow.h"
+#include "Window.h"
 #include <iostream>
 #include "glad/glad.h"
 
-SDLWindow::SDLWindow(const char* title, bool fullscreen) : m_title(title) {
+Window::Window(const char *title, bool fullscreen) : m_title(title) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cerr << "Error initializing SDL" << std::endl;
         return;
@@ -25,40 +25,35 @@ SDLWindow::SDLWindow(const char* title, bool fullscreen) : m_title(title) {
     SDL_DisplayMode displayMode;
     SDL_GetCurrentDisplayMode(0, &displayMode);
 
-    m_sdlWindow = SDL_CreateWindow(
+    m_window = SDL_CreateWindow(
             m_title.c_str(),
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
             displayMode.w,
             displayMode.h,
-            SDL_WINDOW_OPENGL);
+            flags);
 
-    if (!m_sdlWindow) {
+    if (!m_window) {
         std::cerr << "Error creating SDL Window";
         return;
     }
 
-    SDL_SetWindowFullscreen(m_sdlWindow, flags);
+    SDL_SetWindowFullscreen(m_window, flags);
 
-    m_sdlGlContext = SDL_GL_CreateContext(m_sdlWindow);
-
+    m_sdlGlContext = SDL_GL_CreateContext(m_window);
 }
 
-SDLWindow::~SDLWindow() {
+Window::~Window() {
     SDL_GL_DeleteContext(m_sdlGlContext);
-    SDL_DestroyWindow(m_sdlWindow);
+    SDL_DestroyWindow(m_window);
     SDL_Quit();
 }
 
-SDL_Window* SDLWindow::GetWindow() const {
-    return m_sdlWindow;
-}
-
-void* SDLWindow::GetContext() const {
+void* Window::GetContext() const {
     return m_sdlGlContext;
 }
 
-void SDLWindow::UpdateFpsCounter(float dt) {
+void Window::UpdateFpsCounter(float dt) {
     double elapsedSeconds;
 
     m_currentSeconds += dt;
@@ -71,17 +66,17 @@ void SDLWindow::UpdateFpsCounter(float dt) {
 
         snprintf(tmp, 128, "%s @ fps: %.2f", m_title.c_str(), fps);
 
-        SDL_SetWindowTitle(m_sdlWindow, tmp);
+        SDL_SetWindowTitle(m_window, tmp);
         m_frameCount = 0;
     }
     m_frameCount++;
 }
 
-void SDLWindow::ClearImpl(float r, float g, float b, float a) {
+void Window::ClearImpl(float r, float g, float b, float a) {
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void SDLWindow::SwapBuffer() {
-    SDL_GL_SwapWindow(m_sdlWindow);
+void Window::SwapBuffer() {
+    SDL_GL_SwapWindow(m_window);
 }

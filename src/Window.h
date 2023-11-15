@@ -2,19 +2,17 @@
 
 #include <string>
 #include <SDL2/SDL.h>
-#include "Window.hpp"
+#include "IWindow.hpp"
 
-class SDLWindow : public IWindow {
+class Window : public IWindow<SDL_Window> {
 public:
-    explicit SDLWindow(const char* title, bool fullscreen = false);
+    explicit Window(const char* title, bool fullscreen = false);
 
-    ~SDLWindow() override;
-
-    [[nodiscard]] SDL_Window* GetWindow() const;
+    ~Window() override;
 
     [[nodiscard]] void* GetContext() const;
 
-    void UpdateFpsCounter(float dt) override;
+    void UpdateFpsCounter(float dt);
 
     void ClearImpl(float r, float g, float b, float a) override;
 
@@ -22,11 +20,9 @@ public:
 
 private:
     const std::string m_title;
-    SDL_Window* m_sdlWindow;
     SDL_GLContext m_sdlGlContext;
 
     double m_previousSeconds{};
     double m_currentSeconds{};
     int m_frameCount{};
-
 };
