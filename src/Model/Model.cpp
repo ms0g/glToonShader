@@ -1,8 +1,8 @@
-#include "Model/Model.h"
+#include "model.h"
 #include <iostream>
 #include "glm/glm.hpp"
 #include "image/stb_image.h"
-#include "Model/Texture.h"
+#include "texture.h"
 
 
 Model::Model(const std::string& path, bool gamma) : gammaCorrection(gamma) {

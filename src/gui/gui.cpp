@@ -1,8 +1,8 @@
-#include "Gui/Gui.h"
-#include "../../../libs/imgui/imgui.h"
-#include "../../../libs/imgui/imgui_impl_sdl.h"
-#include "../../../libs/imgui/imgui_impl_opengl3.h"
-#include "../../../libs/imgui/imgui_internal.h"
+#include "gui.h"
+#include "../../libs/imgui/imgui.h"
+#include "../../libs/imgui/imgui_impl_sdl.h"
+#include "../../libs/imgui/imgui_impl_opengl3.h"
+#include "../../libs/imgui/imgui_internal.h"
 
 
 Gui::Gui(SDL_Window* window, SDL_GLContext gl_context) {

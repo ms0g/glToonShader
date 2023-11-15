@@ -6,8 +6,8 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include "Mesh.h"
-#include "Shader/Shader.h"
+#include "mesh.h"
+#include "../shader/shader.h"
 
 
 class Model {

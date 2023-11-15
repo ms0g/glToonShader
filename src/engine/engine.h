@@ -1,12 +1,12 @@
 #pragma once
 
 #include <memory>
-#include "Camera/Camera.h"
-#include "Window/IWindow.hpp"
-#include "Shader/Shader.h"
-#include "Model/Model.h"
-#include "Input/Input.h"
-#include "Gui/Gui.h"
+#include "../camera/camera.h"
+#include "../window//IWindow.hpp"
+#include "../shader/shader.h"
+#include "../model/model.h"
+#include "../input/input.h"
+#include "../gui/gui.h"
 
 
 class Engine {

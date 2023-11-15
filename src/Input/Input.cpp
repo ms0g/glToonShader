@@ -1,7 +1,7 @@
-#include "Input/Input.h"
+#include "input.h"
 #include <SDL2/SDL.h>
-#include "Camera/Camera.h"
-#include "../../../libs/imgui/imgui_impl_sdl.h"
+#include "../camera/camera.h"
+#include "../../libs/imgui/imgui_impl_sdl.h"
 
 
 void Input::process(Camera& camera, SDL_Window* window, float dt, bool& isRunning) {

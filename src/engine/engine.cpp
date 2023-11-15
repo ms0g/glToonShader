@@ -1,11 +1,11 @@
-#include "Engine/Engine.h"
+#include "engine.h"
 #include <iostream>
 #include "glm/glm.hpp"
 #include "image/stb_image.h"
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
-#include "Window/Window.h"
-#include "Configs/Configs.hpp"
+#include "../window/window.h"
+#include "../configs/configs.hpp"
 
 
 Engine::Engine() :
