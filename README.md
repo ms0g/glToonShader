@@ -1,4 +1,4 @@
-# gl_toon-shader
+# glToonShader
 
 ## Overview
 
@@ -11,4 +11,4 @@ Toon shading, also known as cel shading, is a rendering technique used in comput
 + [OpenGL](https://www.opengl.org "OpenGL project page") (>= 4.1)
 + [Assimp](https://assimp.org "Open Asset Import Library")
 ### License
-gl_toon-shader is licensed under the MIT License.
+glToonShader is licensed under the MIT License.
