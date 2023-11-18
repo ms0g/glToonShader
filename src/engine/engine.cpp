@@ -5,7 +5,6 @@
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
 #include "../window/window.h"
-#include "../configs/configs.hpp"
 
 
 Engine::Engine() :
