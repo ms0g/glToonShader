@@ -3,6 +3,7 @@
 
 int main() {
     Engine glEngine;
+    glEngine.init("suzanne.glb");
 
     while (glEngine.isRunning()) {
         glEngine.processInput();

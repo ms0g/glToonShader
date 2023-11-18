@@ -5,11 +5,16 @@
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
 
-Engine::Engine() :
-        m_window(std::make_unique<Window>("Toon Shader")),
-        m_camera(std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f))),
-        m_input(std::make_unique<Input>()) {
+bool Engine::isRunning() const {
+    return m_isRunning;
+}
 
+void Engine::init(const char* modelName) {
+    m_window = std::make_unique<Window>("Toon Shader");
+    m_camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
+    m_input = std::make_unique<Input>();
+    m_gui = std::make_unique<Gui>(m_window->nativeHandle(),
+                                  m_window->glContext());
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader(SDL_GL_GetProcAddress)) {
         std::cerr << "Failed to initialize GLAD" << std::endl;
@@ -21,20 +26,15 @@ Engine::Engine() :
 
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
-
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    m_shader = std::make_unique<Shader>(Filesystem::path(SHADER_DIR + "toon.vert.glsl"),
-                                        Filesystem::path(SHADER_DIR + "toon.frag.glsl"));
+    m_shader = std::make_unique<Shader>(
+            Filesystem::path(SHADER_DIR + "toon.vert.glsl"),
+            Filesystem::path(SHADER_DIR + "toon.frag.glsl"));
 
-    m_gui = std::make_unique<Gui>(m_window->nativeHandle(),
-                                  m_window->glContext());
-
-    m_model = std::make_unique<Model>(Filesystem::path(ASSET_DIR + "suzanne.glb"));
-
-    m_isRunning = true;
+    m_model = std::make_unique<Model>(Filesystem::path(ASSET_DIR + modelName));
 
 #ifdef DEBUG
     std::cout << "OpenGL version: " << glGetString(GL_VERSION) << '\n';
@@ -42,10 +42,8 @@ Engine::Engine() :
     std::cout << "OpenGL Driver Vendor: " << glGetString(GL_VENDOR) << '\n';
     std::cout << "OpenGL Renderer: " << glGetString(GL_RENDERER) << '\n';
 #endif
-}
 
-bool Engine::isRunning() const {
-    return m_isRunning;
+    m_isRunning = true;
 }
 
 void Engine::processInput() {
@@ -64,14 +62,16 @@ void Engine::update() {
     glm::mat4 viewMat = m_camera->getViewMatrix();
     glm::vec3 viewPos = m_camera->getPosition();
     glm::mat4 projectionMat = glm::perspective(glm::radians(m_camera->getZoom()),
-                                            (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+                                               (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
     m_shader->setMat4("projection", projectionMat);
     m_shader->setMat4("view", viewMat);
     m_shader->setVec3("viewPos", viewPos);
     // Render the loaded model
     glm::mat4 modelMat = glm::mat4(1.0f);
-    modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-    modelMat = glm::scale(modelMat, glm::vec3(1.0f, 1.0f, 1.0f));    // it's a bit too big for our scene, so scale it down
+    modelMat = glm::translate(modelMat,
+                              glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+    modelMat = glm::scale(modelMat,
+                          glm::vec3(1.0f, 1.0f, 1.0f));    // it's a bit too big for our scene, so scale it down
     m_shader->setMat4("model", modelMat);
 }
 
