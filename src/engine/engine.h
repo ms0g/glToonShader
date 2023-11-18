@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "../camera/camera.h"
-#include "../window//IWindow.hpp"
+#include "../window//window.h"
 #include "../shader/shader.h"
 #include "../model/model.h"
 #include "../input/input.h"
@@ -23,7 +23,7 @@ public:
 
 private:
     bool m_isRunning;
-    std::unique_ptr<IWindow<SDL_Window>> m_window;
+    std::unique_ptr<Window> m_window;
     std::unique_ptr<Gui> m_gui;
     std::unique_ptr<Camera> m_camera;
     std::unique_ptr<Input> m_input;

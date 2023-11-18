@@ -4,8 +4,6 @@
 #include "image/stb_image.h"
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
-#include "../window/window.h"
-
 
 Engine::Engine() :
         m_window(std::make_unique<Window>("Toon Shader")),
@@ -31,9 +29,8 @@ Engine::Engine() :
     m_shader = std::make_unique<Shader>(Filesystem::path(SHADER_DIR + "toon.vert.glsl"),
                                         Filesystem::path(SHADER_DIR + "toon.frag.glsl"));
 
-    auto window = dynamic_cast<Window*>(m_window.get());
     m_gui = std::make_unique<Gui>(m_window->nativeHandle(),
-                                  window->glContext());
+                                  m_window->glContext());
 
     m_model = std::make_unique<Model>(Filesystem::path(ASSET_DIR + "suzanne.glb"));
 
@@ -59,8 +56,7 @@ void Engine::update() {
     m_deltaTime = (SDL_GetTicks() - m_millisecsPreviousFrame) / 1000.0f;
     m_millisecsPreviousFrame = SDL_GetTicks();
 
-    auto window = dynamic_cast<Window*>(m_window.get());
-    window->updateFpsCounter(m_deltaTime);
+    m_window->updateFpsCounter(m_deltaTime);
 
     // Activate shader
     m_shader->activate();
@@ -87,6 +83,5 @@ void Engine::render() {
     m_gui->render();
 
     // SDL swap buffers
-    auto window = dynamic_cast<Window*>(m_window.get());
-    window->swapBuffer();
+    m_window->swapBuffer();
 }
