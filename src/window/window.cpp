@@ -3,11 +3,19 @@
 #include "glad/glad.h"
 
 
-Window::Window(const char* title, bool fullscreen) : m_title(title) {
+Window::~Window() {
+    SDL_GL_DeleteContext(m_glContext);
+    SDL_DestroyWindow(m_window);
+    SDL_Quit();
+}
+
+void Window::initImpl(const char* title, int width, int height, bool fullscreen) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "Error initializing SDL" << std::endl;
         return;
     }
+
+    m_title = title;
 
     int flags = SDL_WINDOW_OPENGL;
     if (fullscreen)
@@ -44,11 +52,6 @@ Window::Window(const char* title, bool fullscreen) : m_title(title) {
     m_glContext = SDL_GL_CreateContext(m_window);
 }
 
-Window::~Window() {
-    SDL_GL_DeleteContext(m_glContext);
-    SDL_DestroyWindow(m_window);
-    SDL_Quit();
-}
 
 void Window::updateFpsCounter(float dt) {
     double elapsedSeconds;
@@ -81,3 +84,4 @@ SDL_GLContext Window::glContext() const {
 void Window::swapBuffer() {
     SDL_GL_SwapWindow(m_window);
 }
+

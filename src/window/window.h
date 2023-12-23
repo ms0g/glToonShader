@@ -7,7 +7,7 @@
 
 class Window : public IWindow<SDL_Window> {
 public:
-    explicit Window(const char* title, bool fullscreen = false);
+    Window() = default;
 
     ~Window() override;
 
@@ -15,13 +15,15 @@ public:
 
     [[nodiscard]] SDL_GLContext glContext() const;
 
-    void clearImpl(float r, float g, float b, float a) override;
-
-    void swapBuffer();
+    void swapBuffer() override;
 
 private:
-    const std::string m_title;
-    SDL_GLContext m_glContext;
+    void initImpl(const char* title, int width, int height, bool fullscreen) override;
+
+    void clearImpl(float r, float g, float b, float a) override;
+
+    std::string m_title;
+    SDL_GLContext m_glContext{};
 
     double m_previousSeconds{};
     double m_currentSeconds{};

@@ -10,9 +10,13 @@ bool Engine::isRunning() const {
 }
 
 void Engine::init(const char* modelName) {
-    m_window = std::make_unique<Window>("Toon Shader");
+    m_window = std::make_unique<Window>();
+    m_window->init("Toon Shader");
+
     m_camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
+
     m_input = std::make_unique<Input>();
+
     m_gui = std::make_unique<Gui>(m_window->nativeHandle(),
                                   m_window->glContext());
     // glad: load all OpenGL function pointers
