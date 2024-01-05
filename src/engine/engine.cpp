@@ -58,7 +58,7 @@ void Engine::update() {
     m_deltaTime = (SDL_GetTicks() - m_millisecsPreviousFrame) / 1000.0f;
     m_millisecsPreviousFrame = SDL_GetTicks();
 
-    m_window->updateFpsCounter(m_deltaTime);
+    m_gui->updateFpsCounter(m_deltaTime);
 
     // Activate shader
     m_shader->activate();

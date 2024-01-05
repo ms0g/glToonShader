@@ -9,5 +9,14 @@ public:
 
     ~Gui();
 
+    void updateFpsCounter(float dt);
+
     void render();
+
+private:
+    double m_previousSeconds{};
+    double m_currentSeconds{};
+    int m_frameCount{};
+    double m_fps{};
+
 };

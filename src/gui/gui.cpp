@@ -1,4 +1,5 @@
 #include "gui.h"
+#include <string>
 #include "../../libs/imgui/imgui.h"
 #include "../../libs/imgui/imgui_impl_sdl.h"
 #include "../../libs/imgui/imgui_impl_opengl3.h"
@@ -24,22 +25,35 @@ Gui::~Gui() {
     ImGui::DestroyContext();
 }
 
+void Gui::updateFpsCounter(float dt) {
+    double elapsedSeconds;
+
+    m_currentSeconds += dt;
+    elapsedSeconds = m_currentSeconds - m_previousSeconds;
+    // limit text updates to 4 per second
+    if (elapsedSeconds > 0.25) {
+        m_previousSeconds = m_currentSeconds;
+        m_fps = (double) m_frameCount / elapsedSeconds;
+        m_frameCount = 0;
+    }
+    m_frameCount++;
+}
+
 void Gui::render() {
     // Start the Dear ImGui frame
-//    ImGui_ImplOpenGL3_NewFrame();
-//    ImGui_ImplSDL2_NewFrame();
-//    ImGui::NewFrame();
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    ImGui::NewFrame();
 
 //    bool show_demo_window = true;
 //    ImGui::ShowDemoWindow(&show_demo_window);
 
 
-//    if (ImGui::Begin("FPS")) {
-//        ImGui::Text("%s", "Test");
-//    }
-//    ImGui::End();
-//
-//    //Render ImGui
-//    ImGui::Render();
-//    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    if (ImGui::Begin("Statistics")) {
+        ImGui::Text("Graphics:  %s FPS", std::to_string(m_fps).c_str());
+    }
+    ImGui::End();
+    //Render ImGui
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

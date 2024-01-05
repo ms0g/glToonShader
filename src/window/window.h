@@ -11,8 +11,6 @@ public:
 
     ~Window() override;
 
-    void updateFpsCounter(float dt);
-
     [[nodiscard]] SDL_GLContext glContext() const;
 
     void swapBuffer() override;
@@ -24,8 +22,4 @@ private:
 
     std::string m_title;
     SDL_GLContext m_glContext{};
-
-    double m_previousSeconds{};
-    double m_currentSeconds{};
-    int m_frameCount{};
 };

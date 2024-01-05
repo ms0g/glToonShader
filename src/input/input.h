@@ -13,7 +13,7 @@ public:
 private:
     void processKeyboard(Camera& camera, float dt, bool& isRunning);
 
-    void processMouse(Camera& camera, int x, int y);
+    void processMouse(Camera& camera);
 
     float m_lastX{SCR_WIDTH / 2.0f};
     float m_lastY{SCR_HEIGHT / 2.0f};
