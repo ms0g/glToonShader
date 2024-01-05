@@ -8,7 +8,9 @@ void Input::process(Camera& camera, SDL_Window* window, float dt, bool& isRunnin
     SDL_Event event;
 
     SDL_PollEvent(&event);
+#ifdef DEBUG
     ImGui_ImplSDL2_ProcessEvent(&event);
+#endif
 
     if (event.type == SDL_QUIT)
         isRunning = false;
@@ -40,14 +42,19 @@ void Input::processKeyboard(Camera& camera, float dt, bool& isRunning) {
 
 void Input::processMouse(Camera& camera) {
     int x, y;
+    bool isClickedRight, isClickedLeft;
     const int buttons = SDL_GetMouseState(&x, &y);
-
+    isClickedLeft = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+    isClickedRight = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+#ifdef DEBUG
     ImGuiIO& io = ImGui::GetIO();
     io.MousePos = ImVec2(x, y);
-    io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
-    io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+    io.MouseDown[0] = isClickedLeft;
+    io.MouseDown[1] = isClickedRight;
+#endif
 
-    auto xpos = static_cast<float>(x);
+    auto
+            xpos = static_cast<float>(x);
     auto ypos = static_cast<float>(y);
 
     if (m_firstMouse) {
@@ -62,7 +69,7 @@ void Input::processMouse(Camera& camera) {
     m_lastX = xpos;
     m_lastY = ypos;
 
-    if (io.MouseDown[1]){
+    if (isClickedRight) {
         camera.processMouseMovement(xoffset, yoffset);
     }
 }

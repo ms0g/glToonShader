@@ -16,9 +16,10 @@ void Engine::init(const char* modelName) {
     m_camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
 
     m_input = std::make_unique<Input>();
-
+#ifdef DEBUG
     m_gui = std::make_unique<Gui>(m_window->nativeHandle(),
                                   m_window->glContext());
+#endif
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader(SDL_GL_GetProcAddress)) {
         std::cerr << "Failed to initialize GLAD" << std::endl;
@@ -57,8 +58,9 @@ void Engine::processInput() {
 void Engine::update() {
     m_deltaTime = (SDL_GetTicks() - m_millisecsPreviousFrame) / 1000.0f;
     m_millisecsPreviousFrame = SDL_GetTicks();
-
+#ifdef DEBUG
     m_gui->updateFpsCounter(m_deltaTime);
+#endif
 
     // Activate shader
     m_shader->activate();
@@ -83,8 +85,9 @@ void Engine::render() {
     m_window->clear(0.2f, 0.3f, 0.3f, 1.0f);
 
     m_model->draw(*m_shader);
-
+#ifdef DEBUG
     m_gui->render();
+#endif
 
     // SDL swap buffers
     m_window->swapBuffer();
