@@ -41,13 +41,6 @@ void Engine::init(const char* modelName) {
 
     m_model = std::make_unique<Model>(Filesystem::path(ASSET_DIR + modelName));
 
-#ifdef DEBUG
-    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << '\n';
-    std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << '\n';
-    std::cout << "OpenGL Driver Vendor: " << glGetString(GL_VENDOR) << '\n';
-    std::cout << "OpenGL Renderer: " << glGetString(GL_RENDERER) << '\n';
-#endif
-
     m_isRunning = true;
 }
 
@@ -88,7 +81,6 @@ void Engine::render() {
 #ifdef DEBUG
     m_gui->render();
 #endif
-
     // SDL swap buffers
     m_window->swapBuffer();
 }

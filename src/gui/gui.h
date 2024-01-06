@@ -14,6 +14,8 @@ public:
     void render();
 
 private:
+    void renderGraphicsInfo();
+
     double m_previousSeconds{};
     double m_currentSeconds{};
     int m_frameCount{};
