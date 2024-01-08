@@ -56,7 +56,7 @@ void Gui::render() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void Gui::renderGraphicsInfo() {
+void Gui::renderGraphicsInfo() const {
     if (ImGui::Begin("Graphics")) {
         ImGui::Text("%s FPS", std::to_string(m_fps).c_str());
         ImGui::Text("OpenGL version: %s", glGetString(GL_VERSION));
