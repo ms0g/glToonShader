@@ -10,7 +10,7 @@ public:
 
     ~Shader();
 
-    [[nodiscard]] unsigned int getId() const;
+    [[nodiscard]] inline unsigned int getId() const { return m_id; };
 
     // use/activate the shader
     void activate() const;

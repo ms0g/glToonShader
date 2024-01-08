@@ -65,10 +65,6 @@ Shader::~Shader() {
     glDeleteProgram(m_id);
 }
 
-unsigned int Shader::getId() const {
-    return m_id;
-}
-
 void Shader::activate() const {
     glUseProgram(m_id);
 }
