@@ -57,9 +57,6 @@ void Window::clearImpl(float r, float g, float b, float a) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-SDL_GLContext Window::glContext() const {
-    return m_glContext;
-}
 
 void Window::swapBuffer() {
     SDL_GL_SwapWindow(m_window);

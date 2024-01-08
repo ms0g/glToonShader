@@ -9,7 +9,7 @@ public:
         initImpl(title, width, height, fullscreen);
     }
 
-    T* nativeHandle() const {
+    inline T* nativeHandle() const {
         return m_window;
     }
 

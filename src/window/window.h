@@ -11,7 +11,7 @@ public:
 
     ~Window() override;
 
-    [[nodiscard]] SDL_GLContext glContext() const;
+    [[nodiscard]] inline SDL_GLContext glContext() const { return m_glContext; };
 
     void swapBuffer() override;
 
