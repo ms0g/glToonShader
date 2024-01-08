@@ -13,7 +13,7 @@ class Engine {
 public:
     Engine() = default;
 
-    [[nodiscard]] bool isRunning() const;
+    [[nodiscard]] inline bool isRunning() const { return m_isRunning; }
 
     void init(const char* modelName);
 

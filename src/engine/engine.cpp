@@ -5,9 +5,6 @@
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
 
-bool Engine::isRunning() const {
-    return m_isRunning;
-}
 
 void Engine::init(const char* modelName) {
     m_window = std::make_unique<Window>();
