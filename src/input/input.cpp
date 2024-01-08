@@ -43,6 +43,7 @@ void Input::processKeyboard(Camera& camera, float dt, bool& isRunning) {
 void Input::processMouse(Camera& camera) {
     int x, y;
     bool isClickedRight, isClickedLeft;
+
     const int buttons = SDL_GetMouseState(&x, &y);
     isClickedLeft = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
     isClickedRight = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
@@ -53,8 +54,7 @@ void Input::processMouse(Camera& camera) {
     io.MouseDown[1] = isClickedRight;
 #endif
 
-    auto
-            xpos = static_cast<float>(x);
+    auto xpos = static_cast<float>(x);
     auto ypos = static_cast<float>(y);
 
     if (m_firstMouse) {

@@ -11,14 +11,14 @@ public:
 
     void updateFpsCounter(float dt);
 
-    void render();
+    void render() const;
 
 private:
-    void renderGraphicsInfo();
+    void renderGraphicsInfo() const;
 
-    double m_previousSeconds{};
-    double m_currentSeconds{};
-    int m_frameCount{};
-    double m_fps{};
+    double m_previousSeconds{0.0};
+    double m_currentSeconds{0.0};
+    int m_frameCount{0};
+    double m_fps{0.0};
 
 };
