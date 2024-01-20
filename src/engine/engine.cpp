@@ -10,13 +10,13 @@ void Engine::init(const char* modelName) {
     m_window = std::make_unique<Window>();
     m_window->init("Toon Shader");
 
-    m_camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
+    m_camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 5.0f));
 
     m_input = std::make_unique<Input>();
-#ifdef DEBUG
+
     m_gui = std::make_unique<Gui>(m_window->nativeHandle(),
                                   m_window->glContext());
-#endif
+
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader(SDL_GL_GetProcAddress)) {
         std::cerr << "Failed to initialize GLAD" << std::endl;
@@ -48,9 +48,10 @@ void Engine::processInput() {
 void Engine::update() {
     m_deltaTime = (SDL_GetTicks() - m_millisecsPreviousFrame) / 1000.0f;
     m_millisecsPreviousFrame = SDL_GetTicks();
-#ifdef DEBUG
+
     m_gui->updateFpsCounter(m_deltaTime);
-#endif
+
+    m_camera->update();
 
     // Activate shader
     m_shader->activate();
@@ -58,7 +59,7 @@ void Engine::update() {
     glm::mat4 viewMat = m_camera->getViewMatrix();
     glm::vec3 viewPos = m_camera->getPosition();
     glm::mat4 projectionMat = glm::perspective(glm::radians(m_camera->getZoom()),
-                                               (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+                                               ASPECT, ZNEAR, ZFAR);
     m_shader->setMat4("projection", projectionMat);
     m_shader->setMat4("view", viewMat);
     m_shader->setVec3("viewPos", viewPos);
@@ -75,9 +76,9 @@ void Engine::render() {
     m_window->clear(0.2f, 0.3f, 0.3f, 1.0f);
 
     m_model->draw(*m_shader);
-#ifdef DEBUG
+
     m_gui->render();
-#endif
+
     // SDL swap buffers
     m_window->swapBuffer();
 }

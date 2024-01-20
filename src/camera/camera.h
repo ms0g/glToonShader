@@ -1,8 +1,9 @@
 #pragma once
 
 #include "glm/glm.hpp"
+#include "../configs/configs.hpp"
 
-enum CameraMovement {
+enum class CameraMovement {
     FORWARD,
     BACKWARD,
     LEFT,
@@ -16,13 +17,18 @@ public:
 
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
 
+    void update();
+
     glm::mat4 getViewMatrix();
 
-    [[nodiscard]] float getZoom() const;
+    [[nodiscard]]
+    inline float getZoom() const { return m_zoom; }
 
-    [[nodiscard]] const glm::vec3& getPosition() const;
+    [[nodiscard]]
+    inline const glm::vec3& getPosition() const { return m_position; }
 
-    [[nodiscard]] const glm::vec3& getFront() const;
+    [[nodiscard]]
+    inline const glm::vec3& getFront() const { return m_front; }
 
     void processKeyboard(CameraMovement direction, float deltaTime);
 
@@ -31,8 +37,6 @@ public:
     void processMouseScroll(float yoffset);
 
 private:
-    void updateCameraVectors();
-
     // camera Attributes
     glm::vec3 m_position{};
     glm::vec3 m_front;
@@ -46,12 +50,6 @@ private:
     float m_movementSpeed;
     float m_mouseSensitivity;
     float m_zoom;
-
-    static constexpr float YAW{-90.0f};
-    static constexpr float PITCH{0.0f};
-    static constexpr float SPEED{2.5f};
-    static constexpr float SENSITIVITY{0.1f};
-    static constexpr float ZOOM{45.0f};
 
 
 };
