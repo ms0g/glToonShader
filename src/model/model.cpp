@@ -4,17 +4,14 @@
 #include "image/stb_image.h"
 #include "texture.h"
 
-
 Model::Model(const std::string& path, bool gamma) : gammaCorrection(gamma) {
     loadModel(path);
 }
-
 
 void Model::draw(Shader& shader) {
     for (auto& mesh: m_meshes)
         mesh.draw(shader);
 }
-
 
 void Model::loadModel(const std::string& path) {
     // read file via ASSIMP
@@ -34,7 +31,6 @@ void Model::loadModel(const std::string& path) {
     processNode(scene->mRootNode, scene);
 }
 
-
 void Model::processNode(aiNode* node, const aiScene* scene) {
     // process each mesh located at the current node
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
@@ -48,7 +44,6 @@ void Model::processNode(aiNode* node, const aiScene* scene) {
         processNode(node->mChildren[i], scene);
     }
 }
-
 
 Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
     // data to fill
@@ -131,7 +126,6 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
     // return a mesh object created from the extracted mesh data
     return {vertices, indices, textures};
 }
-
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName) {
     std::vector<Texture> textures;

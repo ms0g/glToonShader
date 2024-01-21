@@ -10,6 +10,15 @@ enum class CameraMovement {
     RIGHT,
 };
 
+struct CameraSettings {
+    float x;
+    float y;
+    float z;
+    float zoom;
+    float yaw;
+    float pitch;
+};
+
 class Camera {
 public:
     explicit Camera(const glm::vec3& position = glm::vec3{0.0f, 0.0f, 0.0f},
@@ -17,7 +26,7 @@ public:
 
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
 
-    void update();
+    void update(CameraSettings& settings);
 
     glm::mat4 getViewMatrix();
 

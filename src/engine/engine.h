@@ -8,7 +8,6 @@
 #include "../input/input.h"
 #include "../gui/gui.h"
 
-
 class Engine {
 public:
     Engine() = default;
@@ -24,6 +23,8 @@ public:
     void render();
 
 private:
+    CameraSettings cameraSettings{};
+
     bool m_isRunning{false};
     std::unique_ptr<Window> m_window;
     std::unique_ptr<Gui> m_gui;

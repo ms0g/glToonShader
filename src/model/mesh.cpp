@@ -3,7 +3,6 @@
 #include "glad/glad.h"
 #include "../shader/shader.h"
 
-
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures) :
         m_vertices(std::move(vertices)),
         m_indices(std::move(indices)),
@@ -11,7 +10,6 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
     // now that we have all the required data, set the vertex buffers and its attribute pointers.
     SetupMesh();
 }
-
 
 void Mesh::draw(Shader& shader) {
     // bind appropriate textures
@@ -48,7 +46,6 @@ void Mesh::draw(Shader& shader) {
     // always good practice to set everything back to defaults once configured.
     glActiveTexture(GL_TEXTURE0);
 }
-
 
 void Mesh::SetupMesh() {
     // create vao

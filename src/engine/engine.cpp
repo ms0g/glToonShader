@@ -5,7 +5,6 @@
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
 
-
 void Engine::init(const char* modelName) {
     m_window = std::make_unique<Window>();
     m_window->init("Toon Shader");
@@ -42,16 +41,16 @@ void Engine::init(const char* modelName) {
 }
 
 void Engine::processInput() {
-    m_input->process(*m_camera, m_window->nativeHandle(), m_deltaTime, m_isRunning);
+    m_input->process(m_window->nativeHandle(), m_isRunning);
 }
 
 void Engine::update() {
     m_deltaTime = (SDL_GetTicks() - m_millisecsPreviousFrame) / 1000.0f;
     m_millisecsPreviousFrame = SDL_GetTicks();
 
-    m_gui->updateFpsCounter(m_deltaTime);
+    m_gui->update(cameraSettings, m_deltaTime);
 
-    m_camera->update();
+    m_camera->update(cameraSettings);
 
     // Activate shader
     m_shader->activate();

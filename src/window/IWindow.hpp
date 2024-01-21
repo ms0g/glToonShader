@@ -17,7 +17,6 @@ public:
         clearImpl(r, g, b, a);
     }
 
-
 protected:
     virtual void initImpl(const char* title, int width, int height, bool fullscreen) = 0;
 

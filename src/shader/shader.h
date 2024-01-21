@@ -3,7 +3,6 @@
 #include <string>
 #include <glm/glm.hpp>
 
-
 class Shader {
 public:
     Shader(const std::string& vertexPath, const std::string& fragmentPath);
@@ -45,5 +44,4 @@ private:
 
     // the program ID
     unsigned int m_id;
-
 };

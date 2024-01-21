@@ -4,7 +4,6 @@
 #include <iostream>
 #include "glad/glad.h" // include glad to get all the required OpenGL headers
 
-
 Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;

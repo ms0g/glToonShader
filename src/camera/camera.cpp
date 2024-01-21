@@ -23,7 +23,17 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float u
     m_pitch = pitch;
 }
 
-void Camera::update() {
+void Camera::update(CameraSettings& settings) {
+    // update the position
+    m_position.x = settings.x;
+    m_position.y = settings.y;
+    m_position.z = settings.z;
+
+    m_yaw = settings.yaw;
+    m_pitch = settings.pitch;
+
+    m_zoom = settings.zoom;
+
     // calculate the new Front vector
     glm::vec3 _front;
     _front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));

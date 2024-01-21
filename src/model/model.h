@@ -9,7 +9,6 @@
 #include "mesh.h"
 #include "../shader/shader.h"
 
-
 class Model {
 public:
     explicit Model(std::string const& path, bool gamma = false);

@@ -2,7 +2,6 @@
 #include <iostream>
 #include "glad/glad.h"
 
-
 Window::~Window() {
     SDL_GL_DeleteContext(m_glContext);
     SDL_DestroyWindow(m_window);
@@ -56,7 +55,6 @@ void Window::clearImpl(float r, float g, float b, float a) {
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
-
 
 void Window::swapBuffer() {
     SDL_GL_SwapWindow(m_window);
