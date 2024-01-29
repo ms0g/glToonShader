@@ -64,10 +64,15 @@ void Engine::update() {
     m_shader->setVec3("viewPos", viewPos);
     // Render the loaded model
     glm::mat4 modelMat = glm::mat4(1.0f);
+    // translate it down so it's at the center of the scene
     modelMat = glm::translate(modelMat,
-                              glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+                              glm::vec3(0.0f, 0.0f, 0.0f));
+    // it's a bit too big for our scene, so scale it down
     modelMat = glm::scale(modelMat,
-                          glm::vec3(1.0f, 1.0f, 1.0f));    // it's a bit too big for our scene, so scale it down
+                          glm::vec3(1.0f, 1.0f, 1.0f));
+
+    modelMat = glm::rotate(modelMat, (float) SDL_GetTicks() * ROTATION_SPEED, glm::vec3(0.0f, 1.0f, 0.0f));
+
     m_shader->setMat4("model", modelMat);
 }
 

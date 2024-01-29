@@ -5,9 +5,11 @@
 const std::string SHADER_DIR = "shaders/";
 const std::string ASSET_DIR = "assets/";
 
-constexpr unsigned int SCR_WIDTH = 1600;
-constexpr unsigned int SCR_HEIGHT = 900;
+constexpr unsigned int SCR_WIDTH{1600};
+constexpr unsigned int SCR_HEIGHT{900};
 constexpr float ASPECT = (float) SCR_WIDTH / (float) SCR_HEIGHT;
+
+constexpr float ROTATION_SPEED{0.0005f};
 
 // Camera Settings
 constexpr float YAW{-90.0f};
