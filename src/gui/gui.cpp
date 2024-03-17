@@ -1,7 +1,7 @@
 #include "gui.h"
 #include <string>
 #include "glad/glad.h"
-#include "../camera/camera.h"
+#include "../camera/cameraSettings.hpp"
 #include "../../libs/imgui/imgui.h"
 #include "../../libs/imgui/imgui_impl_sdl.h"
 #include "../../libs/imgui/imgui_impl_opengl3.h"

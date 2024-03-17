@@ -1,23 +1,8 @@
 #pragma once
 
 #include "glm/glm.hpp"
+#include "cameraSettings.hpp"
 #include "../configs/configs.hpp"
-
-enum class CameraMovement {
-    FORWARD,
-    BACKWARD,
-    LEFT,
-    RIGHT,
-};
-
-struct CameraSettings {
-    float x;
-    float y;
-    float z;
-    float zoom;
-    float yaw;
-    float pitch;
-};
 
 class Camera {
 public:
