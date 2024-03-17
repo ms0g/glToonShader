@@ -1,16 +1,19 @@
 #pragma once
 
 #include <memory>
-#include "../camera/camera.h"
-#include "../window//window.h"
-#include "../shader/shader.h"
-#include "../model/model.h"
-#include "../input/input.h"
-#include "../gui/gui.h"
+#include "../camera/cameraSettings.hpp"
 
+class Camera;
+class Window;
+class Gui;
+class Input;
+class Shader;
+class Model;
 class Engine {
 public:
-    Engine() = default;
+    Engine();
+
+    ~Engine();
 
     [[nodiscard]] inline bool isRunning() const { return m_isRunning; }
 
@@ -24,8 +27,6 @@ public:
 
 private:
     CameraSettings cameraSettings{};
-
-    bool m_isRunning{false};
     std::unique_ptr<Window> m_window;
     std::unique_ptr<Gui> m_gui;
     std::unique_ptr<Camera> m_camera;
@@ -33,6 +34,7 @@ private:
     std::unique_ptr<Shader> m_shader;
     std::unique_ptr<Model> m_model;
 
+    bool m_isRunning{false};
     float m_deltaTime{};
     uint32_t m_millisecsPreviousFrame{0};
 

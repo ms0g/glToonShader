@@ -4,6 +4,16 @@
 #include "image/stb_image.h"
 #include "filesystem/filesystem.h"
 #include "glad/glad.h"
+#include "../camera/camera.h"
+#include "../window//window.h"
+#include "../shader/shader.h"
+#include "../model/model.h"
+#include "../input/input.h"
+#include "../gui/gui.h"
+
+Engine::Engine() = default;
+
+Engine::~Engine() = default;
 
 void Engine::init(const char* modelName) {
     m_window = std::make_unique<Window>();

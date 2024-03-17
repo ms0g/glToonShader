@@ -16,7 +16,6 @@ float remap(float inMin, float inMax, float outMin, float outMax, float v) {
     return mix(outMin, outMax, t);
 }
 
-
 void main() {
     vec3 modelColour = vec3(0.5);
     vec3 lighting = vec3(0.0);
